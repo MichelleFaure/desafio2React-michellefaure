@@ -1,23 +1,23 @@
-import logo from './logo.svg';
 import './App.css';
+import Alert from './components/Alert/Alert';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Login from './components/Login/Login';
+import { useState } from 'react';
 
 function App() {
+  const [isValid, setIsValid] = useState();
+  const handlerSubmitResult = (e) => {
+    setIsValid(e)
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className='container'>
+        <Login onSubmitForm={(e)=> handlerSubmitResult(e) } />
+        <Alert 
+        text={isValid ? "contraseña correcta" : "contraseña incorrecta"} 
+        variant={isValid ? "success" : "danger"}/>
+      </div>
     </div>
   );
 }
